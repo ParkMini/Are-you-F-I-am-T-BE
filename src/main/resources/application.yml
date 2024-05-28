@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: rufimt
+
+  datasource:
+    url: jdbc:postgresql://100.100.100.2:5432/postgres
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  logging:
+    level:
+      root: debug
+      org.springframework: debug
