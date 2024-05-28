@@ -10,3 +10,4 @@ fun main(args: Array<String>) {
 	runApplication<RufimtApplication>(*args)
 }
 
+// 폴드에서 작성한 주석 
