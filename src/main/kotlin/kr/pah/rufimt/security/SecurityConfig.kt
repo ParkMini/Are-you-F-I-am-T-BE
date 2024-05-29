@@ -2,6 +2,7 @@ package kr.pah.rufimt.security
 
 import jakarta.servlet.http.HttpServletResponse
 import kr.pah.rufimt.service.UserService
+import kr.pah.rufimt.util.Result
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -43,7 +44,7 @@ class SecurityConfig(private val userService: UserService) {
                         response.characterEncoding = "UTF-8"
                         response.contentType = "application/json; charset=UTF-8"
                         response.status = HttpServletResponse.SC_UNAUTHORIZED
-                        response.writer.write("{\"status\": 401, \"data\": \"로그인 후 이용 가능합니다.\"}")
+                        response.writer.write(Result.unauthorized("로그인 후 이용 가능합니다.").body.toString())
                     }
             }
 
@@ -74,7 +75,7 @@ class SecurityConfig(private val userService: UserService) {
         return AuthenticationSuccessHandler { request, response, authentication ->
             response.characterEncoding = "UTF-8"
             response.contentType = "application/json; charset=UTF-8"
-            response.writer.write("{\"status\": 200, \"data\": \"로그인 되었습니다.\"}")
+            response.writer.write(Result.ok("로그인 되었습니다.").body.toString())
         }
     }
 
@@ -85,8 +86,8 @@ class SecurityConfig(private val userService: UserService) {
             response.contentType = "application/json; charset=UTF-8"
             response.status = HttpServletResponse.SC_UNAUTHORIZED
             when (exception) {
-                is UsernameNotFoundException -> response.writer.write("{\"status\": 401, \"data\": \"아이디가 존재하지 않습니다.\"}")
-                else -> response.writer.write("{\"status\": 401, \"data\": \"비밀번호가 잘못되었습니다.\"}")
+                is UsernameNotFoundException -> response.writer.write(Result.unauthorized("아이디가 존재하지 않습니다.").body.toString())
+                else -> response.writer.write(Result.unauthorized("비밀번호가 잘못되었습니다.").body.toString())
             }
         }
     }
