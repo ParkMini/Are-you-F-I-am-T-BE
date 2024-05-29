@@ -2,8 +2,9 @@ package kr.pah.rufimt.dto.user
 
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.NotNull
+import jakarta.validation.constraints.Pattern
 import jakarta.validation.constraints.Size
-import kr.pah.rufimt.entity.MbtiType
 import java.time.LocalDate
 
 data class UserDto(
@@ -25,14 +26,16 @@ data class UserDto(
     @field:NotBlank(message = "전화번호는 필수 항목입니다.")
     val phoneNumber: String,
 
-    @field:NotBlank(message = "생년월일은 필수 항목입니다.")
+    @field:NotNull(message = "생년월일은 필수 항목입니다.")
     val birthDate: LocalDate,
 
     @field:NotBlank(message = "성별은 필수 항목입니다.")
+    @field:Pattern(regexp = "^(M|F)$", message = "유효한 성별 값이 아닙니다. (M 또는 F이어야 합니다)")
     val gender: String,
 
     @field:NotBlank(message = "MBTI는 필수 항목입니다.")
-    val mbti: MbtiType,
+    @field:Pattern(regexp = "^(ISTJ|ISFJ|INFJ|INTJ|ISTP|ISFP|INFP|INTP|ESTP|ESFP|ENFP|ENTP|ESTJ|ESFJ|ENFJ|ENTJ)$", message = "유효한 MBTI 유형이 아닙니다.")
+    val mbti: String,
 
     val role: String = "USER"
 )

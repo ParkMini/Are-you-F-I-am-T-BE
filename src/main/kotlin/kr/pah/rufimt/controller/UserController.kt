@@ -21,8 +21,13 @@ class UserController(private val userService: UserService) {
             return Result.badRequest("이미 가입된 아이디입니다.")
         }
 
-        userService.registerUser(userDto)
-        return Result.ok("정상적으로 가입되었습니다.")
+        try {
+            userService.registerUser(userDto)
+        } catch (e: IllegalArgumentException) {
+            return Result.badRequest(e.message ?: "잘못된 요청입니다.")
+        }
+
+        return Result.created("정상적으로 가입되었습니다.")
     }
 
     @GetMapping("/userInfo")
@@ -41,5 +46,10 @@ class UserController(private val userService: UserService) {
     fun handleValidationExceptions(ex: MethodArgumentNotValidException): ResponseEntity<Map<String, Any>> {
         val errors = ex.bindingResult.allErrors.joinToString("; ") { error -> error.defaultMessage ?: "잘못된 입력입니다." }
         return Result.badRequest(errors)
+    }
+
+    @ExceptionHandler(Exception::class)
+    fun handleExceptions(ex: Exception): ResponseEntity<Map<String, Any>> {
+        return Result.internalServerError(ex.message ?: "서버 오류가 발생했습니다.")
     }
 }
