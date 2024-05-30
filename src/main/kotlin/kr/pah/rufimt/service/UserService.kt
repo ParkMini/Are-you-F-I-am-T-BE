@@ -1,8 +1,8 @@
 package kr.pah.rufimt.service
 
-import kr.pah.rufimt.entity.User
-import kr.pah.rufimt.entity.MbtiType
-import kr.pah.rufimt.repository.UserRepository
+import kr.pah.rufimt.entity.user.User
+import kr.pah.rufimt.entity.user.MbtiType
+import kr.pah.rufimt.repository.user.UserRepository
 import kr.pah.rufimt.dto.user.UserDto
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service

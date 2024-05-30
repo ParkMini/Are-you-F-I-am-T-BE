@@ -1,4 +1,4 @@
-package kr.pah.rufimt.entity
+package kr.pah.rufimt.entity.user
 
 import jakarta.persistence.*
 import java.time.LocalDate
@@ -41,5 +41,8 @@ data class User(
     val registeredAt: LocalDate = LocalDate.now(),
 
     @Column(nullable = false)
-    val isDeleted: Boolean = false
+    val isDeleted: Boolean = false,
+
+    @Column(nullable = false)
+    var points: Int = 0
 )

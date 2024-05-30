@@ -1,6 +1,6 @@
-package kr.pah.rufimt.repository
+package kr.pah.rufimt.repository.user
 
-import kr.pah.rufimt.entity.User
+import kr.pah.rufimt.entity.user.User
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface UserRepository : JpaRepository<User, Long> {

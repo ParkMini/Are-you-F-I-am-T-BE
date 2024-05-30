@@ -1,4 +1,4 @@
-package kr.pah.rufimt.entity
+package kr.pah.rufimt.entity.user
 
 enum class MbtiType {
     ISTJ, ISFJ, INFJ, INTJ,
