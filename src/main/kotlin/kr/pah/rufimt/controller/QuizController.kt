@@ -2,7 +2,7 @@ package kr.pah.rufimt.controller
 
 import kr.pah.rufimt.dto.oxQuiz.AnswerCheckDto
 import kr.pah.rufimt.dto.oxQuiz.QuizQuestionRequestDto
-import kr.pah.rufimt.service.oxQuiz.QuizService
+import kr.pah.rufimt.service.QuizService
 import kr.pah.rufimt.util.Result
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal

@@ -1,4 +1,4 @@
-package kr.pah.rufimt.service.oxQuiz
+package kr.pah.rufimt.service
 
 import kr.pah.rufimt.dto.oxQuiz.AnswerCheckDto
 import kr.pah.rufimt.dto.oxQuiz.QuizQuestionDto
