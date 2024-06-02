@@ -21,7 +21,11 @@ class QuizService(
      * 새로운 퀴즈 질문을 추가합니다.
      */
     fun addQuizQuestion(request: QuizQuestionRequestDto): QuizQuestion {
-        val newQuestion = QuizQuestion(question = request.question, answer = request.answer)
+        val newQuestion = QuizQuestion(
+            question = request.question,
+            answer = request.answer,
+            explanation = request.explanation
+        )
         return quizQuestionRepository.save(newQuestion)
     }
 
@@ -109,11 +113,11 @@ class QuizService(
             }
             singlePlayerGameRepository.save(updatedGame)
 
-            return "정답입니다."
+            return "정답입니다. 해설: ${question.explanation}"
         } else {
             val updatedQuestion = question.copy(incorrectCount = question.incorrectCount + 1)
             quizQuestionRepository.save(updatedQuestion)
-            return "오답입니다."
+            return "오답입니다. 해설: ${question.explanation}"
         }
     }
 
@@ -137,7 +141,30 @@ class QuizService(
         return QuizQuestionDto(
             id = this.id,
             question = this.question,
-            answer = this.answer.name
+            answer = this.answer.name,
+            explanation = this.explanation
+        )
+    }
+
+    fun fromDto(dto: SinglePlayerGameDto): SinglePlayerGame {
+        val question1 = quizQuestionRepository.findById(dto.question1.id).orElseThrow { IllegalArgumentException("퀴즈 질문을 찾을 수 없습니다.") }
+        val question2 = quizQuestionRepository.findById(dto.question2.id).orElseThrow { IllegalArgumentException("퀴즈 질문을 찾을 수 없습니다.") }
+        val question3 = quizQuestionRepository.findById(dto.question3.id).orElseThrow { IllegalArgumentException("퀴즈 질문을 찾을 수 없습니다.") }
+        val question4 = quizQuestionRepository.findById(dto.question4.id).orElseThrow { IllegalArgumentException("퀴즈 질문을 찾을 수 없습니다.") }
+        val question5 = quizQuestionRepository.findById(dto.question5.id).orElseThrow { IllegalArgumentException("퀴즈 질문을 찾을 수 없습니다.") }
+
+        return SinglePlayerGame(
+            id = dto.id,
+            question1 = question1,
+            question2 = question2,
+            question3 = question3,
+            question4 = question4,
+            question5 = question5,
+            question1Correct = dto.question1Correct,
+            question2Correct = dto.question2Correct,
+            question3Correct = dto.question3Correct,
+            question4Correct = dto.question4Correct,
+            question5Correct = dto.question5Correct
         )
     }
 }

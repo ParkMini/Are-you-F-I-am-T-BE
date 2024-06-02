@@ -2,6 +2,7 @@ package kr.pah.rufimt.controller
 
 import kr.pah.rufimt.dto.oxQuiz.AnswerCheckDto
 import kr.pah.rufimt.dto.oxQuiz.QuizQuestionRequestDto
+import kr.pah.rufimt.dto.oxQuiz.SinglePlayerGameDto
 import kr.pah.rufimt.service.QuizService
 import kr.pah.rufimt.util.Result
 import org.springframework.http.ResponseEntity
@@ -61,6 +62,19 @@ class QuizController(
     fun getSinglePlayerGame(@PathVariable id: UUID): ResponseEntity<Map<String, Any>> {
         val game = quizService.getSinglePlayerGame(id)
         return Result.ok(game)
+    }
+
+    /**
+     * 주어진 ID에 해당하는 싱글 플레이어 게임을 업데이트합니다.
+     */
+    @PutMapping("/single-player-game/{id}")
+    fun updateSinglePlayerGame(
+        @PathVariable id: UUID,
+        @RequestBody updatedGame: SinglePlayerGameDto
+    ): ResponseEntity<Map<String, Any>> {
+        val game = quizService.fromDto(updatedGame)
+        val savedGame = quizService.updateSinglePlayerGame(game)
+        return Result.ok(savedGame)
     }
 
     /**

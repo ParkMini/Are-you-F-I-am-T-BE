@@ -24,7 +24,10 @@ data class QuizQuestion(
     val correctCount: Int = 0,
 
     @Column(nullable = false)
-    val incorrectCount: Int = 0
+    val incorrectCount: Int = 0,
+
+    @Column(nullable = false)
+    val explanation: String
 )
 
 enum class Answer {

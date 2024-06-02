@@ -5,5 +5,6 @@ import java.util.UUID
 data class QuizQuestionDto(
     val id: UUID,
     val question: String,
-    val answer: String
+    val answer: String,
+    val explanation: String
 )
