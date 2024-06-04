@@ -91,7 +91,8 @@ class Result {
          * @return 500 Internal Server Error 응답
          */
         fun internalServerError(message: Any): ResponseEntity<Map<String, Any>> {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(mapOf("status" to 500, "data" to message))
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(mapOf("status" to 500, "data" to message))
         }
 
         /**
@@ -128,6 +129,16 @@ class Result {
          */
         fun gatewayTimeout(message: Any): ResponseEntity<Map<String, Any>> {
             return ResponseEntity.status(HttpStatus.GATEWAY_TIMEOUT).body(mapOf("status" to 504, "data" to message))
+        }
+
+        /**
+         * 요청이 너무 많음을 나타냅니다.
+         * @param message 응답 메시지 또는 데이터
+         * @return 429 Too Many Requests 응답
+         */
+        fun tooManyRequests(message: String): ResponseEntity<Map<String, Any>> {
+            return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS)
+                .body(mapOf("status" to 429, "message" to message))
         }
     }
 }

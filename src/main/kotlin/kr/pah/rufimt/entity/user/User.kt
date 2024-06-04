@@ -44,5 +44,17 @@ data class User(
     val isDeleted: Boolean = false,
 
     @Column(nullable = false)
-    var points: Int = 0
+    var points: Int = 0,
+
+    @Column(nullable = false)
+    var adWatchCount: Int = 0,
+
+    @Column(nullable = true)
+    var adWatchDate: LocalDate? = null,
+
+    @Column(nullable = true)
+    var lastCheckInDate: LocalDate? = null,
+
+    @Column(nullable = false)
+    var consecutiveDays: Int = 0
 )
