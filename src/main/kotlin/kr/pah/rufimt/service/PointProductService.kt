@@ -1,8 +1,7 @@
 package kr.pah.rufimt.service
 
 import kr.pah.rufimt.dto.point.*
-import kr.pah.rufimt.entity.point.PointProduct
-import kr.pah.rufimt.repository.PointProductRepository
+import kr.pah.rufimt.repository.point.PointProductRepository
 import kr.pah.rufimt.repository.user.UserRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
