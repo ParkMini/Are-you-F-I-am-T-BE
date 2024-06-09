@@ -20,7 +20,7 @@ class DataInitializer(
      */
     @Bean
     @Transactional
-    fun initializePointProducts() {
+    fun initializePointProducts(): List<PointProduct> {
         if (pointProductRepository.count() == 0L) {
             val products = listOf(
                 PointProduct(name = "5천원 - 100포인트", price = 5000, points = 100, bonusPercentage = 2.5),
@@ -30,7 +30,9 @@ class DataInitializer(
                 PointProduct(name = "10만원 - 2000포인트", price = 100000, points = 2000, bonusPercentage = 7.5)
             )
             pointProductRepository.saveAll(products)
+            return products
         }
+        return emptyList()
     }
 
     /**
@@ -38,7 +40,7 @@ class DataInitializer(
      */
     @Bean
     @Transactional
-    fun initializeQuizQuestions() {
+    fun initializeQuizQuestions(): List<QuizQuestion> {
         if (quizQuestionRepository.count() == 0L) {
             val quizQuestions = listOf(
                 QuizQuestion(question = "T 유형은 결정을 내릴 때 논리와 객관성을 중시한다.", answer = Answer.O, explanation = "T 유형은 결정을 내릴 때 논리와 객관성을 중시합니다. 감정보다는 사실과 데이터를 기반으로 판단하는 경향이 있습니다."),
@@ -92,6 +94,8 @@ class DataInitializer(
                 QuizQuestion(question = "내향형(I)은 혼자 있는 시간을 통해 에너지를 충전한다.", answer = Answer.O, explanation = "내향형(I)은 혼자 있는 시간을 통해 에너지를 충전합니다.")
             )
             quizQuestionRepository.saveAll(quizQuestions)
+            return quizQuestions
         }
+        return emptyList()
     }
 }
