@@ -16,12 +16,21 @@ class ChatController(
     @PostMapping("/queue")
     fun joinQueue(@RequestParam user: String): ChatRoomDto? {
         val chatRoom = chatService.joinQueue(user)
-        return chatRoom?.let { ChatRoomDto(it.id, it.name) }
+        return chatRoom?.let {
+            ChatRoomDto(
+                id = it.id,
+                name = it.name,
+                user1 = it.user1,
+                user2 = it.user2,
+                createdAt = it.createdAt.toString()
+            )
+        }
     }
 
     @MessageMapping("/sendMessage")
     @SendTo("/topic/messages")
     fun sendMessage(messageDto: ChatMessageDto): ChatMessageDto {
+        chatService.saveMessage(messageDto.roomId, messageDto.sender, messageDto.content)
         return messageDto
     }
 }
